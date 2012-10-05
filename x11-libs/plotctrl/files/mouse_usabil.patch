@@ -1,0 +1,81 @@
+Index: include/wx/plotctrl/plotctrl.h
+===================================================================
+--- include/wx/plotctrl/plotctrl.h	(revision 3034)
++++ include/wx/plotctrl/plotctrl.h	(working copy)
+@@ -462,6 +462,7 @@
+ 
+     // Zoom, if zoom_x or zoom_y <= 0 then fit that axis to window and center it
+     bool SetZoom( const wxPoint2DDouble &zoom, bool around_center=true, bool send_event=false );
++    bool SetZoom( const wxPoint2DDouble &zoom, const wxPoint2DDouble &zoom_center, bool send_event );
+     virtual bool SetZoom( double zoom_x, double zoom_y,
+                   double origin_x, double origin_y, bool send_event=false );
+ 
+@@ -514,6 +515,10 @@
+     void SetAreaMouseFunction(wxPlotCtrlMouse_Type func, bool send_event=false);
+     wxPlotCtrlMouse_Type GetAreaMouseFunction() const { return m_area_mouse_func; }
+ 
++    // Set default mouse action
++    void SetDefaultAreaMouseFunction(wxPlotCtrlMouse_Type func) { m_default_area_mouse_func = func; SetAreaMouseFunction(func, true); }
++    wxPlotCtrlMouse_Type GetDefaultAreaMouseFunction() const { return m_default_area_mouse_func; }
++
+     // Set what sort of marker should be drawn when dragging mouse
+     void SetAreaMouseMarker(wxPlotCtrlMarker_Type type);
+     wxPlotCtrlMarker_Type GetAreaMouseMarker() const { return m_area_mouse_marker; }
+@@ -957,6 +962,7 @@
+     wxWindow *m_winCapture;     // don't use, see accessor functions
+ 
+     wxPlotCtrlMouse_Type  m_area_mouse_func;
++    wxPlotCtrlMouse_Type  m_default_area_mouse_func;
+     wxPlotCtrlMarker_Type m_area_mouse_marker;
+     int m_area_mouse_cursorid;
+ 
+Index: src/plotctrl.cpp
+===================================================================
+--- src/plotctrl.cpp	(revision 3034)
++++ src/plotctrl.cpp	(working copy)
+@@ -1930,6 +1930,18 @@
+         return SetZoom( zoom.m_x, zoom.m_y, m_viewRect.GetLeft(), m_viewRect.GetTop(), send_event );
+ }
+ 
++bool wxPlotCtrl::SetZoom( const wxPoint2DDouble &zoom, const wxPoint2DDouble &zoom_center, bool send_event )
++{
++    if ((zoom.m_x > 0) && (zoom.m_y > 0))
++    {
++        double origin_x = zoom_center.m_x - (zoom_center.m_x - m_viewRect.GetLeft())*m_zoom.m_x/zoom.m_x;
++        double origin_y = zoom_center.m_y - (zoom_center.m_y - m_viewRect.GetTop() )*m_zoom.m_y/zoom.m_y;
++        return SetZoom( zoom.m_x, zoom.m_y, origin_x, origin_y, send_event );
++    }
++    else
++        return SetZoom( zoom.m_x, zoom.m_y, m_viewRect.GetLeft(), m_viewRect.GetTop(), send_event );
++}
++
+ bool wxPlotCtrl::SetZoom( const wxRect &window, bool send_event )
+ {
+     if ((window.GetHeight()<1) || (window.GetWidth()<1)) return false;
+@@ -3090,7 +3102,7 @@
+ 
+         double dir = event.GetWheelRotation() > 0 ? 1.25 : 0.75;
+         wxPoint2DDouble z = GetZoom();
+-        SetZoom( z * dir, true, true);
++        SetZoom( z * dir, wxPoint2DDouble(plotX, plotY), true);
+     }
+ 
+     int active_index = GetActiveIndex();
+@@ -3383,7 +3395,7 @@
+     else if (ctrl && shift && !alt)
+         SetAreaMouseFunction(wxPLOTCTRL_MOUSE_ZOOM, true);
+     else // if (!ctrl || !shift || !alt)
+-        SetAreaMouseFunction(wxPLOTCTRL_MOUSE_NOTHING, true);
++        SetAreaMouseFunction(m_default_area_mouse_func, true);
+ }
+ 
+ void wxPlotCtrl::ProcessAreaEVT_KEY_UP( wxKeyEvent &event )
+@@ -3405,7 +3417,7 @@
+     else if (ctrl && shift && !alt)
+         SetAreaMouseFunction(wxPLOTCTRL_MOUSE_ZOOM, true);
+     else // if (!ctrl || !shift || !alt)
+-        SetAreaMouseFunction(wxPLOTCTRL_MOUSE_NOTHING, true);
++        SetAreaMouseFunction(m_default_area_mouse_func, true);
+ }
+ 
+ void wxPlotCtrl::ProcessAreaEVT_PAINT( wxPaintEvent& WXUNUSED(event), wxPaintDC& dc, wxPlotCtrlArea* areaWin )

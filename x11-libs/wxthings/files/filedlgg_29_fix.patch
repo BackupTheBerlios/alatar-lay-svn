@@ -1,0 +1,15 @@
+Index: include/wx/things/filebrws.h
+===================================================================
+--- include/wx/things/filebrws.h	(revision 3034)
++++ include/wx/things/filebrws.h	(working copy)
+@@ -16,7 +16,8 @@
+ #include <wx/dirctrl.h>
+ #include <wx/filedlg.h>
+ #include <wx/textdlg.h>
+-#include <wx/generic/filedlgg.h>
++//#include <wx/generic/filedlgg.h>
++#include <wx/generic/filectrlg.h>
+ 
+ class WXDLLIMPEXP_FWD_BASE wxConfigBase;
+ class WXDLLIMPEXP_FWD_CORE wxCheckBox;
+
