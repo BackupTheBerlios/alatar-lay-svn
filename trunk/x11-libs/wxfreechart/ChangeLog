@@ -1,0 +1,9 @@
+# ChangeLog for x11-libs/wxfreechart
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header:  $
+
+*wxfreechart-9999 (05 Oct 2012)
+
+  05 Oct 2012; Alatar <alatar_@list.ru> +wxfreechart-9999.ebuild:
+  Initial import.
+

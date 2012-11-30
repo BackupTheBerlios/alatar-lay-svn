@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer>
+	<email>alatar_@list.ru</email>
+</maintainer>
+<longdescription lang="en">
+Open source flash program for the STM32 ARM processors using the ST bootloader. 
+
+Features
+ * device identification 
+ * write to flash/ram at specified address
+ * read from flash/ram at specified address
+ * auto-detect Intel HEX or raw binary input format with option to force binary 
+ * flash from binary file 
+ * save flash to binary file 
+ * verify & retry up to N times on failed writes 
+ * start execution at specified address 
+ * software reset the device when finished if -g not specified 
+ * resume already initialized connection (for when reset fails)
+</longdescription>
+</pkgmetadata>
+

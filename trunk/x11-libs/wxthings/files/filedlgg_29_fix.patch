@@ -7,7 +7,6 @@ Index: include/wx/things/filebrws.h
  #include <wx/filedlg.h>
  #include <wx/textdlg.h>
 -#include <wx/generic/filedlgg.h>
-+//#include <wx/generic/filedlgg.h>
 +#include <wx/generic/filectrlg.h>
  
  class WXDLLIMPEXP_FWD_BASE wxConfigBase;
