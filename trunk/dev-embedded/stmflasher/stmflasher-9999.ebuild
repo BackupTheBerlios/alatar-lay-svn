@@ -10,7 +10,6 @@ DESCRIPTION="Open source cross platform flash program for the STM factory prepro
 HOMEPAGE="http://developer.berlios.de/projects/stmflasher/"
 ESVN_REPO_URI="svn://svn.berlios.de/${PN}/trunk"
 SRC_URI=""
-#CMAKE_USE_DIR="${S}/build"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -23,9 +22,4 @@ RDEPEND="${DEPEND}"
 src_unpack(){
 	subversion_src_unpack
 }
-
-#src_install() {
-#	insinto /usr
-#	dosbin stmflasher
-#}
 
