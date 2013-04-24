@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<maintainer>
+	<email>alatar_@list.ru</email>
+</maintainer>
+<longdescription lang="en">
+Simplicity Studio is the innovative solution which helps you to always have the latest docs, examples, firmware and software!
+</longdescription>
+</pkgmetadata>
+

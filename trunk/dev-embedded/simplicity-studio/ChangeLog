@@ -1,0 +1,9 @@
+# ChangeLog for dev-embedded/simplicity-studio
+# Copyright 1999-2012 Gentoo Foundation; Distributed under the GPL v2
+# $Header:  $
+
+*simplicity-studio-1.10 (24 Apr 2013)
+
+  24 Apr 2013; Alatar <alatar_@list.ru> +simplicity-studio-1.10.ebuild:
+  Initial import.
+
