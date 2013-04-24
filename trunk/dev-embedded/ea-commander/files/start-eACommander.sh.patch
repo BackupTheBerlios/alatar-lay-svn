@@ -1,0 +1,19 @@
+--- start-eACommander.sh.orig	2013-04-24 09:14:06.912303509 +0400
++++ start-eACommander.sh	2013-04-24 12:01:04.212302314 +0400
+@@ -1,12 +1,12 @@
+ #!/bin/sh
+ 
+ # Path to binary
+-DIR="$( cd "$( dirname "$0" )" && pwd )"
++DIR="$( cd "$( dirname "$0" )/.." && pwd )"
+ 
+ # Make sure binary is runnable
+-chmod 754 "$DIR"/eACommander
++#chmod 754 "$DIR"/eACommander
+ 
+ # Run with libs
+-export LD_LIBRARY_PATH="$DIR":"$LD_LIBRARY_PATH"
+-"$DIR"/eACommander "$@"
++export LD_LIBRARY_PATH="$DIR/lib":"$DIR/lib32":"$LD_LIBRARY_PATH"
++"$DIR"/bin/eACommander "$@"
+ 
