@@ -49,11 +49,11 @@ src_install() {
 	into /opt
 	exeinto /opt/bin
 	doexe ${BINARY_NAME}
-	newexe start-eACommander.sh ea-commander
+	newexe start-eACommander.sh ${PN}
 
 	dodoc README.txt README.linux Changelog
 
-	make_desktop_entry ea-commander 'energyAware Commander'
-#	make_desktop_entry ea-commander 'energyAware Commander' ${BINARY_NAME} 'Development'
-
+	make_desktop_entry ${PN} 'energyAware Commander'
+#	newicon <icon_name>.png ${PN}.png
+#	make_desktop_entry ${PN} 'energyAware Commander' ${PN}.png 'Development;Electronics'
 }

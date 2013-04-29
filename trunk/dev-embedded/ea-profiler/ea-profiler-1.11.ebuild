@@ -49,13 +49,12 @@ src_install() {
 	into /opt
 	exeinto /opt/bin
 	doexe ${BINARY_NAME}
-	newexe start-profiler.sh ea-${BINARY_NAME}
+	newexe start-profiler.sh ${PN}
 
 	dolib libdwarf.so
 	dolib libelf.so
 	dodoc README.txt Changelog
 
-	make_desktop_entry ea-${BINARY_NAME} 'energyAware Profiler'
-#	make_desktop_entry ea-${BINARY_NAME} 'energyAware Profiler' ${BINARY_NAME} 'Development;Electronics'
-
+	newicon profiler256.png ${PN}.png
+	make_desktop_entry ${PN} 'energyAware Profiler' ${PN}.png 'Development;Electronics'
 }

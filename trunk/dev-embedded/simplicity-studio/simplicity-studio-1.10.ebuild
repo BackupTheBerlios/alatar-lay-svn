@@ -43,9 +43,9 @@ src_unpack() {
 src_install() {
 	into /opt
 	exeinto /opt/bin
-	newexe studio.py simplicity-studio.py
+	newexe studio.py ${PN}.py
 
-	make_desktop_entry simplicity-studio.py 'Simplicity Studio'
-#	make_desktop_entry simplicity-studio.py 'Simplicity Studio' ${BINARY_NAME} 'Development;Electronics'
-
+	make_desktop_entry ${PN}.py 'Simplicity Studio'
+#	newicon <icon_name>.png ${PN}.png
+#	make_desktop_entry ${PN}.py 'Simplicity Studio'  ${PN}.png 'Development;Electronics'
 }
