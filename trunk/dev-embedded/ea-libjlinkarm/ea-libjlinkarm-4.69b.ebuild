@@ -5,8 +5,8 @@
 EAPI=4
 inherit eutils
 
-DESCRIPTION="The energyAware Profiler is a GUI tool profiling of energy consumption of the EFM32 MCUs."
-HOMEPAGE="http://www.energymicro.com/downloads/online-help-energyaware-profiler"
+DESCRIPTION="libjlinkarm is a shared library for SEGGER J-Link JTAG/SWD Emulator with USB interface"
+HOMEPAGE="http://www.segger.com/jlink-software.html"
 SRC_URI="https://energymicrofiles.s3.amazonaws.com/dl/packages/energyAwareProfiler_linux_pkg_1.11.zip"
 
 LICENSE="Segger"
