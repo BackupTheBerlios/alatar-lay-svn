@@ -1,0 +1,10 @@
+# ChangeLog for dev-embedded/ea-profiler
+# Copyright 1999-2013 Gentoo Foundation; Distributed under the GPL v2
+# $Header:  $
+
+*ea-designer-1.10_beta (06 Aug 2013)
+
+  06 Aug 2013; Alatar <alatar_@list.ru> +ea-profiler-1.10_beta.ebuild,
+  +start-eADesigner.sh.patch:
+  Initial import.
+
