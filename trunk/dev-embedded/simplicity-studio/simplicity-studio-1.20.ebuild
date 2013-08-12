@@ -7,7 +7,7 @@ inherit eutils
 
 DESCRIPTION="Simplicity Studio is a free software suite which you need to start developing your EFM32 application."
 HOMEPAGE="http://www.energymicro.com/tools/simplicity-studio"
-SRC_URI="http://cdn.energymicro.com/dl/packages/studio_linux.tar.gz"
+SRC_URI="https://energymicrofiles.s3.amazonaws.com/dl/packages/studiow_linux_pkg.zip"
 
 LICENSE="EnergyMicro"
 SLOT="0"
@@ -15,12 +15,14 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RESTRICT="mirror"
+QA_PREBUILT="*"
 EMUL_X86_VER=20120520
+ABI="x86"
+BINARY_NAME=studiow
+DIR_NAME=${BINARY_NAME}
 
 RDEPEND="
-	dev-lang/python
-	>=sys-libs/readline-5.2
-	dev-libs/libusb
+	>=dev-libs/quazip-0.5.1-r1
 	amd64? (
 		>=app-emulation/emul-linux-x86-baselibs-${EMUL_X86_VER}
 		>=app-emulation/emul-linux-x86-qtlibs-${EMUL_X86_VER}
@@ -37,15 +39,18 @@ RDEPEND="
 
 src_unpack() {
 	unpack ${A}
-	mv -v energymicro "${S}" || die
+	mv -v ${DIR_NAME} "${S}" || die
+	cd "${S}"
+	epatch "${FILESDIR}"/start-studio.sh.patch
 }
 
 src_install() {
 	into /opt
 	exeinto /opt/bin
-	newexe studio.py ${PN}.py
+	doexe ${BINARY_NAME}
+	newexe start-studio.sh ${PN}
+	dodoc README.txt Changelog
 
-	make_desktop_entry ${PN}.py 'Simplicity Studio'
-#	newicon <icon_name>.png ${PN}.png
-#	make_desktop_entry ${PN}.py 'Simplicity Studio'  ${PN}.png 'Development;Electronics'
+	newicon simplycity_icon256x256.png ${PN}.png
+	make_desktop_entry ${PN} 'Simplicity Studio'  ${PN}.png 'Development;Electronics'
 }

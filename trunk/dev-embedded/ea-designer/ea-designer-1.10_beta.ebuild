@@ -22,6 +22,7 @@ BINARY_NAME=eADesigner
 DIR_NAME=${BINARY_NAME}
 
 RDEPEND="
+	>=dev-libs/boost-1.46
 	amd64? (
 		>=app-emulation/emul-linux-x86-baselibs-${EMUL_X86_VER}
 		>=app-emulation/emul-linux-x86-qtlibs-${EMUL_X86_VER}
