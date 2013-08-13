@@ -22,7 +22,6 @@ BINARY_NAME=studiow
 DIR_NAME=${BINARY_NAME}
 
 RDEPEND="
-	>=dev-libs/quazip-0.5.1-r1
 	amd64? (
 		>=app-emulation/emul-linux-x86-baselibs-${EMUL_X86_VER}
 		>=app-emulation/emul-linux-x86-qtlibs-${EMUL_X86_VER}
@@ -49,6 +48,7 @@ src_install() {
 	exeinto /opt/bin
 	doexe ${BINARY_NAME}
 	newexe start-studio.sh ${PN}
+	dolib libquazip.so.1
 	dodoc README.txt Changelog
 
 	newicon simplycity_icon256x256.png ${PN}.png
