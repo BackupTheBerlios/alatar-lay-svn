@@ -15,11 +15,12 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RESTRICT="mirror"
-QA_PREBUILT="*"
+QA_PREBUILT="opt/.*"
 EMUL_X86_VER=20120520
 ABI="x86"
 BINARY_NAME=studiow
 DIR_NAME=${BINARY_NAME}
+S_PREFIX="/opt/silabs"
 
 RDEPEND="
 	amd64? (
@@ -44,13 +45,16 @@ src_unpack() {
 }
 
 src_install() {
-	into /opt
-	exeinto /opt/bin
+	into ${S_PREFIX}
+	exeinto ${S_PREFIX}/bin
 	doexe ${BINARY_NAME}
 	newexe start-studio.sh ${PN}
 	dolib libquazip.so.1
 	dodoc README.txt Changelog
 
-	newicon simplycity_icon256x256.png ${PN}.png
-	make_desktop_entry ${PN} 'Simplicity Studio'  ${PN}.png 'Development;Electronics'
+	dodir /opt/bin
+	dosym ${S_PREFIX}/bin/${PN} /opt/bin/${PN} || die
+
+	newicon simplycity_icon256x256.png ${PN}
+	make_desktop_entry ${S_PREFIX}/bin/${PN} 'Simplicity Studio'  ${PN} 'Development;Electronics'
 }
