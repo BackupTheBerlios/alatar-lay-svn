@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=4
-inherit eutils
+inherit eutils multilib
 
 DESCRIPTION="Simplicity Studio is a free software suite which you need to start developing your EFM32 application."
 HOMEPAGE="http://www.energymicro.com/tools/simplicity-studio"
@@ -41,7 +41,8 @@ src_unpack() {
 	unpack ${A}
 	mv -v ${DIR_NAME} "${S}" || die
 	cd "${S}"
-	epatch "${FILESDIR}"/start-studio.sh.patch
+	sed -e "s:_BASEDIR_:${S_PREFIX}:g" -e "s:_LIBDIR_:$(get_libdir):g" "${FILESDIR}"/start-studio.sh.patch > "${T}"/start-studio.sh.patch || die
+	epatch "${T}"/start-studio.sh.patch
 }
 
 src_install() {
